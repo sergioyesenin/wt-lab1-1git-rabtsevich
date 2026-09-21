@@ -1,3 +1,4 @@
+/* ============ AOS ============ */
 AOS.init({
   duration: 800,
   easing: 'ease-out-cubic',
@@ -5,28 +6,15 @@ AOS.init({
   offset: 80
 });
 
-const section = document.getElementById('mediaSection');
-const audio   = document.getElementById('bgAudio');
-const btn     = document.getElementById('audioBtn');
+/* ============ Шапка: прозрачная наверху, тёмная при прокрутке ============ */
+(function () {
+  const header = document.getElementById('siteHeader');
+  if (!header) return;
 
-audio.volume = 0.55;
+  const toggle = () => {
+    header.classList.toggle('is-scrolled', window.scrollY > 40);
+  };
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      audio.play()
-        .then(() => btn.classList.add('d-none'))
-        .catch(() => btn.classList.remove('d-none')); // браузер запретил автозапуск
-    } else {
-      audio.pause();
-      audio.currentTime = 0; // сбрасываем, чтобы при возврате начиналось с начала
-    }
-  });
-}, { threshold: 0.5 });
-
-observer.observe(section);
-
-btn.addEventListener('click', () => {
-  audio.play();
-  btn.classList.add('d-none');
-});
+  toggle();
+  window.addEventListener('scroll', toggle, { passive: true });
+})();

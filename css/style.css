@@ -113,3 +113,84 @@ body {
   position: relative;
   z-index: 2;
 }
+
+/* ============ Шапка сайта ============ */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;      /* top:0; left:0; right:0 */
+  z-index: 1030;          /* выше hero-video (у него z-index внутри 0–2) */
+  padding: .5rem 0;
+  background: transparent;
+  transition: background .35s ease, backdrop-filter .35s ease, box-shadow .35s ease;
+}
+
+/* Состояние после прокрутки — фон появляется */
+.site-header.is-scrolled {
+  background: rgba(16, 20, 24, .85);   /* совпадает с .media-section #101418 */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, .35);
+}
+
+/* Бренд: имя + часть */
+.site-header .navbar-brand {
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: .3px;
+  line-height: 1.15;
+  padding: 0;
+}
+
+.site-header .navbar-brand:hover,
+.site-header .navbar-brand:focus {
+  color: #fff;
+}
+
+.site-header .brand-name {
+  font-size: 1.05rem;
+}
+
+.site-header .brand-unit {
+  font-size: .8rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, .65);
+  margin-top: 2px;
+}
+
+/* Ссылки навигации */
+.site-header .nav-link {
+  color: rgba(255, 255, 255, .8);
+  font-weight: 500;
+  padding: .4rem .9rem;
+  transition: color .25s ease;
+}
+
+.site-header .nav-link:hover,
+.site-header .nav-link:focus {
+  color: #fff;
+}
+
+/* Гамбургер на мобильных — белый */
+.site-header .navbar-toggler {
+  border-color: rgba(255, 255, 255, .3);
+}
+
+.site-header .navbar-toggler:focus {
+  box-shadow: 0 0 0 .2rem rgba(255, 255, 255, .15);
+}
+
+/* В раскрытом мобильном меню тоже тёмный фон для читаемости */
+@media (max-width: 991.98px) {
+  .site-header .navbar-collapse {
+    background: rgba(16, 20, 24, .95);
+    backdrop-filter: blur(10px);
+    border-radius: .5rem;
+    margin-top: .5rem;
+    padding: .5rem .75rem;
+  }
+}
+
+/* Небольшая корректировка: якоря не прячутся под шапкой */
+section[id] {
+  scroll-margin-top: 70px;
+}

@@ -1,0 +1,115 @@
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Каждая секция = экран презентации */
+.section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 4rem 0;
+}
+
+/* «Магнитный» скролл по секциям (можно убрать, если мешает) */
+@media (min-width: 768px) {
+  body { scroll-snap-type: y proximity; }
+  .section { scroll-snap-align: start; }
+}
+
+.media-section {
+  background: #101418;
+}
+
+/* Единый размер фото и видео в карусели */
+.media-item {
+  height: 60vh;
+  min-height: 280px;
+  object-fit: cover;
+}
+
+/* ============ Блок «Будни»: картинки слева/справа ============ */
+#s2 img {
+  display: block;
+  max-width: 100%;       /* не вылезает за колонку */
+  max-height: 360px;     /* единая высота для всех — убирает пустоты */
+  width: auto;           /* пропорции сохраняются, ничего не обрезается */
+  height: auto;
+  margin: 0 auto;        /* центрирует узкие вертикальные кадры */
+  border-radius: .5rem;
+}
+
+/* ============ Карточки с фоном (если где-то ещё используются) ============ */
+.card-bg {
+  position: relative;
+  min-height: 260px;
+  overflow: hidden;
+  color: #fff;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.card-bg__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.card-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.65) 100%);
+  z-index: 1;
+  transition: background .35s ease;
+}
+
+.card-bg > h3,
+.card-bg > p {
+  position: relative;
+  z-index: 2;
+}
+
+.card-bg:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,.35);
+}
+
+.card-bg:hover::before {
+  background: linear-gradient(180deg, rgba(0,0,0,.05) 0%, rgba(0,0,0,.5) 100%);
+}
+
+/* ============ Hero-секция с фоновым видео ============ */
+.hero-video {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-video__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero-video__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+  z-index: 1;
+}
+
+.hero-video__content {
+  position: relative;
+  z-index: 2;
+}
